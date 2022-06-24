@@ -4,6 +4,8 @@ from joypy import joyplot
 from pandas.api.types import CategoricalDtype
 
 df = pd.read_csv('./Data-Analysis/Graphs/Notebooks/Temperatures-Sydney/weatherAUS.csv',usecols=['Date','Location', 'MinTemp', 'MaxTemp'])
+# df = pd.read_csv('weatherAUS.csv',usecols=['Date','Location', 'MinTemp', 'MaxTemp'])
+
 
 # Reading the csv file with temperatures
 sydney = df.query("Location == 'Sydney'")
@@ -25,11 +27,12 @@ ax, fig = joyplot(
     column=['MinTemp', 'MaxTemp'],
     color=['#686de0', '#eb4d4b'],
     legend=True,
-    alpha=0.85,
-    figsize=(12,8)
+    alpha=0.90,
+    linewidth=0.55,
+    figsize=(12,10),
 )
 
 plt.title('Ridgline Test to show Min and Max Temperatures in Sydney', fontsize=20)
 
 # Export ridgline graph to a png file in the same directory
-plt.savefig(r'./Data-Analysis/Graphs/Notebooks/Temperatures-Sydney/Ridgline-TempSydney.png')
+plt.savefig(r'./Data-Analysis/Graphs/Notebooks/Temperatures-Sydney/Ridgline-TempSydney.png',bbox_inches="tight" )
