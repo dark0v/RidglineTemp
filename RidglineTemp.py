@@ -4,8 +4,6 @@ from joypy import joyplot
 from pandas.api.types import CategoricalDtype
 
 df = pd.read_csv('./Data-Analysis/Graphs/Notebooks/Temperatures-Sydney/weatherAUS.csv',usecols=['Date','Location', 'MinTemp', 'MaxTemp'])
-# df = pd.read_csv('weatherAUS.csv',usecols=['Date','Location', 'MinTemp', 'MaxTemp'])
-
 
 # Reading the csv file with temperatures
 sydney = df.query("Location == 'Sydney'")
