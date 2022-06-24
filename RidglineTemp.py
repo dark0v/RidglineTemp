@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 from joypy import joyplot
 from pandas.api.types import CategoricalDtype
 
-df = pd.read_csv('weatherAUS.csv',usecols=['Date','Location', 'MinTemp', 'MaxTemp'])
+df = pd.read_csv('./Data-Analysis/Graphs/Notebooks/Temperatures-Sydney/weatherAUS.csv',usecols=['Date','Location', 'MinTemp', 'MaxTemp'])
 
+# Reading the csv file with temperatures
 sydney = df.query("Location == 'Sydney'")
 sydney = sydney.drop('Location', axis=1)
 sydney['Date'] = sydney['Date'].astype('datetime64')
@@ -15,14 +16,20 @@ cat_month = CategoricalDtype(
 )
 
 sydney['Month'] = sydney['Month'].astype(cat_month)
-
 plt.figure()
 
+# Generating ridgline graph
 ax, fig = joyplot(
-    data=sydney[['MaxTemp', 'Month']],
+    data=sydney[['MinTemp', 'MaxTemp', 'Month']], 
     by='Month',
+    column=['MinTemp', 'MaxTemp'],
+    color=['#686de0', '#eb4d4b'],
+    legend=True,
+    alpha=0.85,
     figsize=(12,8)
 )
 
-plt.title('Ridgline Test to show Max Temperatures in Sydney', fontsize=20)
-plt.show()
+plt.title('Ridgline Test to show Min and Max Temperatures in Sydney', fontsize=20)
+
+# Export ridgline graph to a png file in the same directory
+plt.savefig(r'./Data-Analysis/Graphs/Notebooks/Temperatures-Sydney/Ridgline-TempSydney.png')
